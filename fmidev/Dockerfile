@@ -9,9 +9,9 @@ RUN yum -y update && \
     yum -y install ccache && \
     yum -y install git && \
     yum -y install rpmlint && \
-    rm -rf /var/cache/yum
+    rm -rf /var/cache/yum/*
 
-RUN mkdir /var/cache/yum && \
+RUN mkdir -p /var/cache/yum && \
     rm -rf /root/.ccache /root/anaconda-ks.cfg && \
     mkdir -m 777 /ccache && \
     echo cache_dir=/ccache > /etc/ccache.conf && \

@@ -19,6 +19,6 @@ RUN mkdir /var/cache/yum && \
 
 # Mounting /ccache to host directory will make repeated
 # builds of same software significantly faster
-VOLUME [ "/var/cache/yum" , "/ccache" ]
+VOLUME /ccache
 
 CMD ["bash"]

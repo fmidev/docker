@@ -38,8 +38,16 @@ mkdir -m 777 -p /tmp/shared-yum-cache'''
       steps {
         sh '''yum makecache
 yum update -y
+yum install -y make
 ccache -s'''
       }
     }
+    stage('Test fmidev') {
+      steps {
+        sh '''ls -la /tmp/shared-ccache
+ls -la /tmp/shared-yum-cache
+test `find /tmp/shared-yum-cache -name \*.rpm | wc -l` -gt 0 
+      }
+    }    
   }
 }

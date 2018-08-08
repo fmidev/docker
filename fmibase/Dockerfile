@@ -20,6 +20,6 @@ RUN \
  rm -rf /var/cache/yum
 
 RUN mkdir -p /var/cache/yum && rm -f /root/anaconda-ks.cfg
-VOLUME /var/chache/yum
+VOLUME /var/cache/yum
 
 CMD ["/bin/bash"]

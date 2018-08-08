@@ -19,3 +19,5 @@ done
 
 # Create timestamp with current time if not already there
 test ! -e "$testfile" && touch "$testfile"
+exit 0
+

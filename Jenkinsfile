@@ -8,7 +8,8 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '''./build.sh
+        sh '''ls -la
+./build.sh
 mkdir -m 777 -p /tmp/shared-ccache
 mkdir -m 777 -p /tmp/shared-yum-cache'''
       }

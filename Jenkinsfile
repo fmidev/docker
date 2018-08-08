@@ -16,7 +16,7 @@ mkdir -m 777 -p /tmp/shared-yum-cache'''
     }
     stage('Test') {
       steps {
-        sh '''test.sh'''
+        sh './test.sh'
       }
     }
     stage('Final test') {
@@ -28,7 +28,7 @@ mkdir -m 777 -p /tmp/shared-yum-cache'''
 
       }
       steps {
-        sh '''./test-inside-container.sh'''
+        sh './test-inside-container.sh'
       }
     }
   }

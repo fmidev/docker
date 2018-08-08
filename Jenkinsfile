@@ -14,40 +14,22 @@ mkdir -m 777 -p /tmp/shared-ccache
 mkdir -m 777 -p /tmp/shared-yum-cache'''
       }
     }
-    stage('Test fmibase') {
-      agent {
-        docker {
-          image 'fmibase'
-          args '-v /tmp/shared-ccache:/ccache -v /tmp/shared-yum-cache:/var/cache/yum'
-        }
-
-      }
+    stage('Test') {
       steps {
-        sh '''yum makecache
-'''
+        sh '''test.sh'''
       }
     }
-    stage('Test fmidev') {
+    stage('Final test') {
       agent {
         docker {
           image 'fmidev'
-          args '-v /tmp/shared-ccache:/ccache -v /tmp/shared-yum-cache:/var/cache/yum'
+          args '-v /tmp/shared-ccache:/ccache -v /tmp/shared-yum-cache:/var/cache/yum -v ${PWD}:/work -w /work'
         }
 
       }
       steps {
-        sh '''yum makecache
-yum update -y
-yum install -y make
-ccache -s'''
+        sh '''./test-inside-container.sh'''
       }
     }
-    stage('Test fmidev') {
-      steps {
-        sh '''ls -la /tmp/shared-ccache
-ls -la /tmp/shared-yum-cache
-test `find /tmp/shared-yum-cache -name \*.rpm | wc -l` -gt 0 
-      }
-    }    
   }
 }

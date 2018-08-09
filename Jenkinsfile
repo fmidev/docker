@@ -23,7 +23,7 @@ mkdir -m 777 -p /tmp/shared-yum-cache'''
       agent {
         docker {
           image 'fmidev'
-          args '-v /tmp/shared-ccache:/ccache -v /tmp/shared-yum-cache:/var/cache/yum -v ${PWD}:/work -w /work'
+          args '--mount type=tmpfs,destination=/ccache -v /tmp/shared-yum-cache:/var/cache/yum -v ${PWD}:/work -w /work'
         }
 
       }

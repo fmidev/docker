@@ -20,8 +20,15 @@ int main(int argc,char *argv[]) {
 }
 EOF
 
-gcc -Wall -o /tmp/out /tmp/in.c
+# Test ccache is working and compilation results end up in there
+# Note that this clears ccache ... should use a transient one?
+ccache -C
+ccache -z
+gcc -Wall -c -o /tmp/out.o /tmp/in.c
 amount=`ccache -s | fgrep "files in cache" | sed -e 's/^[^0-9]*//'`
+test "$amount" -gt "0"
+gcc -Wall -c -o /tmp/out.o /tmp/in.c
+amount=`ccache -s | fgrep "cache hit (direct)" | sed -e 's/^[^0-9]*//'`
 test "$amount" -gt "0"
 
 

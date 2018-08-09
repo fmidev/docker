@@ -15,7 +15,11 @@ RUN mkdir -p /var/cache/yum && \
     rm -rf /root/.ccache /root/anaconda-ks.cfg && \
     mkdir -m 777 /ccache && \
     echo cache_dir=/ccache > /etc/ccache.conf && \
-    echo umask=000 >> /etc/ccache.conf
+    echo umask=000 >> /etc/ccache.conf && \
+    ln -s /usr/bin/ccache /usr/local/bin/c++ && \
+    ln -s /usr/bin/ccache /usr/local/bin/g++ && \
+    ln -s /usr/bin/ccache /usr/local/bin/gcc && \
+    ln -s /usr/bin/ccache /usr/local/bin/cc
 
 # Mounting /ccache to host directory will make repeated
 # builds of same software significantly faster

@@ -1,10 +1,10 @@
 #!/bin/bash -ex
 
 
-ls -l /tmp/ccache
-ls -l /tmp/shared-yum-cache
+ls -l /ccache
+ls -l /var/cache/yum
 
-test `find /tmp/shared-yum-cache | wc -l` -gt 0
-test `find /tmp/ccache | wc -l` -gt 0
+test `find /var/cache/yum/ | wc -l` -gt 0
+test `find /ccache/ | wc -l` -gt 0
 
 

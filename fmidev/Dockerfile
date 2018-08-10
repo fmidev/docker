@@ -9,6 +9,7 @@ RUN yum -y update && \
     yum -y install ccache && \
     yum -y install git && \
     yum -y install rpmlint && \
+    yum -y install createrepo_c && \
     rm -rf /var/cache/yum/*
 
 RUN mkdir -p /var/cache/yum && \
